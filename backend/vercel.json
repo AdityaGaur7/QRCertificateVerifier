@@ -1,8 +1,27 @@
 {
-    "functions": {
-      "api": {
-        "handler": "api/index.js",
-        "runtime": "@vercel/node"
+    "version": 2,
+    "builds": [
+      { "src": "*.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/$1"
+      },
+      {
+        "src": "/certificates/:id",
+        "methods": ["OPTIONS", "POST"],
+        "dest": "/your-vercel-function-for-options-and-post"
+      },
+      {
+        "src": "/certificates/:id",
+        "methods": ["OPTIONS", "GET"],
+        "dest": "/your-vercel-function-for-options-and-get"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/"
       }
-    }
+    ]
   }
+  

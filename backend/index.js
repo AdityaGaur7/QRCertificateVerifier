@@ -35,15 +35,13 @@ app.get('/certificates', async (req, res) => {
 app.get('/certificates/:id', async (req, res) => {
     try {
         let serial = req.params.id;
-        const certificate = await Certificate.findOne({ SerialNo: serial });
+        const certificate = await Certificate.findOne({ CertificateNumber: serial });
         if (!certificate) return res.status(404).send({ message: 'Certificate not found' });
         res.send(`<div style="display:flex;justify-content:center;flex-direction:column;align-items:center;width:100%;height:100vh">
         <div style="border: 2px solid black;padding: 1rem;">
             <p><span >Name:</span> ${certificate["Name"]}</p>
             <p><span >Roll Number:</span> ${certificate["RollNumber"]}</p>
             <p><span >Certificate Data:</span> ${certificate["CertificateData"]}</p>
-            <p><span >Post:</span> ${certificate["Post"]}</p>
-            <p><span >Serial No:</span> ${certificate["SerialNo"]}</p>
             <p><span >Certificate Number:</span> ${certificate["CertificateNumber"]}</p></div></div>`);
 
     } catch (error) {
